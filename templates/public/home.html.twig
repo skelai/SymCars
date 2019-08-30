@@ -10,19 +10,32 @@
                     <div class="form-group">
                         <input class="form-control mb-2 mr-sm-2" name="driver_search" placeholder="Lookig for a driver"
                                type="text">
-                        <button class="btn btn-dark form-control my-sm-0"> Search </button>
+                        <button class="btn btn-dark form-control my-sm-0"> Search</button>
                     </div>
                 </form>
             </div>
             <div class="col-6">
                 <form method="post" action="{{ path('vehicle_index') }}">
                     <div class="form-group">
-                        <input class="form-control mb-2 mr-sm-2" name="vehicle_search" placeholder="Looking for a vehicle"
+                        <input class="form-control mb-2 mr-sm-2" name="vehicle_search"
+                               placeholder="Looking for a vehicle"
                                type="text">
-                        <button class="btn btn-dark form-control my-sm-0"> Search </button>
+                        <button class="btn btn-dark form-control my-sm-0"> Search</button>
                     </div>
                 </form>
             </div>
+        </div>
+
+        <div class="card" style="margin: auto; width: 18rem;">
+            <div class="card-header">Figures</div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Nombre de conducteurs : {{ drivers | length }}</li>
+                <li class="list-group-item">Nombre de vehicules : {{ vehicles | length }}</li>
+                <li class="list-group-item">Nombre de locations : {{ rentals | length }}</li>
+                <li class="list-group-item">Nombre de véhicules non-loués :
+                    {# TODO COUNT#}
+                </li>
+            </ul>
         </div>
     </div>
 {% endblock %}

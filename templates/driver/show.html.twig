@@ -4,6 +4,7 @@
 
 {% block body %}
     <h1>Driver</h1>
+    <a class="btn btn-secondary pull-right" href="{{ path('driver_index') }}">back to list</a>
 
     <table class="table">
         <tbody>
@@ -20,15 +21,15 @@
                 <td>{{ driver.lastname }}</td>
             </tr>
             <tr>
-                <th>Phone_number</th>
+                <th>Phone number</th>
                 <td>{{ driver.phoneNumber }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('driver_index') }}">back to list</a>
 
-    <a href="{{ path('driver_edit', {'id': driver.id}) }}">edit</a>
+    <a class="btn btn-warning m-2" href="{{ path('driver_edit', {'id': driver.id}) }}">edit</a>
 
     {{ include('driver/_delete_form.html.twig') }}
+
 {% endblock %}

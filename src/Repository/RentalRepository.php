@@ -19,6 +19,7 @@ class RentalRepository extends ServiceEntityRepository
         parent::__construct($registry, Rental::class);
     }
 
+
     // /**
     //  * @return Rental[] Returns an array of Rental objects
     //  */
