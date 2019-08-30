@@ -16,12 +16,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class DriverController extends AbstractController
 {
     /**
-     * @Route("/", name="driver_index", methods={"GET"})
+     * @Route("/", name="driver_index")
      */
-    public function index(DriverRepository $driverRepository): Response
+    public function index(DriverRepository $driverRepository, Request $request): Response
     {
+        $results = null;
+
+        $driverSearch = $request->request->get('driver_search');
+
+        if ($driverSearch)
+        {
+            $results = $driverRepository->findByFirstnameAndLastnameAndPhonenumber($driverSearch);
+        }else{
+            $results = $driverRepository->findAll();
+
+        }
         return $this->render('driver/index.html.twig', [
-            'drivers' => $driverRepository->findAll(),
+            'drivers' => $results,
         ]);
     }
 

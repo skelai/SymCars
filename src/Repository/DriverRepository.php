@@ -19,6 +19,18 @@ class DriverRepository extends ServiceEntityRepository
         parent::__construct($registry, Driver::class);
     }
 
+    public function findByFirstnameAndLastnameAndPhonenumber(string $value){
+        return $this->createQueryBuilder('d')
+                    ->orWhere('d.firstname LIKE :val')
+                    ->orWhere('d.lastname LIKE :val')
+                    ->orWhere('d.phone_number LIKE :val')
+                    ->setParameter('val', '%'.$value.'%')
+                    ->orderBy('d.firstname')
+                    ->getQuery()
+                    ->getResult();
+    }
+
+
     // /**
     //  * @return Driver[] Returns an array of Driver objects
     //  */

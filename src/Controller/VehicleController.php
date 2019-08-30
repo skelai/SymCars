@@ -16,12 +16,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class VehicleController extends AbstractController
 {
     /**
-     * @Route("/", name="vehicle_index", methods={"GET"})
+     * @Route("/", name="vehicle_index", methods={"GET", "POST"})
      */
-    public function index(VehicleRepository $vehicleRepository): Response
+    public function index(VehicleRepository $vehicleRepository, Request $request): Response
     {
+        $results = null;
+
+        $vehicleSearch = $request->request->get('vehicle_search');
+
+        if ($vehicleSearch)
+        {
+            $results = $vehicleRepository->findByBrandAndModelAndImmatriculation($vehicleSearch);
+        }else{
+            $results = $vehicleRepository->findAll();
+        }
         return $this->render('vehicle/index.html.twig', [
-            'vehicles' => $vehicleRepository->findAll(),
+            'vehicles' => $results,
         ]);
     }
 

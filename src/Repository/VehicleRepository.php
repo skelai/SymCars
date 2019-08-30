@@ -19,6 +19,19 @@ class VehicleRepository extends ServiceEntityRepository
         parent::__construct($registry, Vehicle::class);
     }
 
+    public function findByBrandAndModelAndImmatriculation(string $value)
+    {
+        return $this->createQueryBuilder('v')
+            ->orWhere('v.brand LIKE :val')
+            ->orWhere('v.model LIKE :val')
+            ->orWhere('v.immatriculation LIKE :val')
+            ->setParameter('val', '%'.$value.'%')
+            ->orderBy('v.brand')
+            ->getQuery()
+            ->getResult();
+    }
+
+
     // /**
     //  * @return Vehicle[] Returns an array of Vehicle objects
     //  */
